@@ -1,0 +1,92 @@
+@charset "utf-8";
+html,body,div,span,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,code,del,dfn,em,img,q,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td{
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-weight: inherit;
+  font-style: inherit;
+  font-size: 100%;
+  font-family: inherit;
+  vertical-align: baseline;
+  line-height: 1;
+}
+#header {  
+  position: fixed !important;  
+  position: absolute;  
+  top: 0;  
+  left: 0;  
+  width: 100%;  
+  height: 64px;  
+  background-color: #000;
+  color: #ff0;
+  font-size: 10px;
+}
+body{
+  font-size: 12px;
+  margin: 0;
+  padding: 64px 0;
+  line-height: 1.5;
+  min-height: 800px;
+  font-family: "ＭＳ Ｐ明朝","MS PMincho","ヒラギノ明朝 Pro W3","Hiragino Mincho Pro","Droid Sans";
+  color: #FFF;
+  background: black url("/img/s5_bg_body_repeat.png") repeat;
+}
+a{
+  color: #FFF;
+  font-size: 8px;
+}
+table{
+  border-collapse: separate;
+  border-spacing: 0;
+  margin: 0;
+  padding: 0;
+  line-height: 1.0;
+  margin-bottom: 10px;
+  background-color: #f2f1dd;
+  border-top: 1px solid #76601d;
+  border-bottom: 1px solid #76601d;
+  border-right: 1px solid #76601d;
+}
+table th{
+  border-left: 1px solid #76601d;
+  border-bottom: 1px dotted #76601d;
+  padding: 5px 8px;
+  color: #300;
+  text-align: center;
+  vertical-align: middle;
+  background-color: #e0dcc1;
+  font-weight: bold;
+}
+table td{
+  border-left: 1px solid #76601d;
+  border-bottom: 1px dotted #76601d;
+  padding: 4px 8px;
+  text-align: center;
+  color: #300;
+  line-height: 1.5;
+  vertical-align: middle;
+}
+.innerbox {
+  padding: 4px;
+}
+.ticket {
+  width: 293px;
+  margin: 4px;
+  border: 1px solid #76601d;
+  background: url("/img/s5_bg_pattern.png") repeat;
+  float: left;
+}
+.basepointMain {
+  margin: 4px;
+  background: url("/img/bg_homename_main.png") repeat-y left top;
+}
+.basepointTop {
+  background: url("/img/bg_homename_top.png") no-repeat left top;
+}
+.basepointBottom {
+  background: url("/img/bg_homename_bottom.png") no-repeat left bottom;
+  padding: 12px 16px;
+}
+.gray {
+  color:lightgray;
+}
