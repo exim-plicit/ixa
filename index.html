@@ -120,9 +120,8 @@
       }
       
       //期待値計算
-      function calcExpected(add_rate,data){
-        return Math.min(data.eff_rate + add_rate,100) * data.eff_atk / 100;
-      }
+      function calcExpectedAtk(add_rate,data){ return Math.min(data.eff_rate + add_rate,100) * data.eff_atk / 100; }
+      function calcExpectedDes(add_rate,data){ return Math.min(data.eff_rate + add_rate,100) * data.eff_des / 100; }
       //初期設定
       (function(){
         //状態取得
@@ -159,21 +158,18 @@
         $('<tr>').appendTo('#skill_table').append([
           $('<th rowspan="2">スキル名</th>'),
           $('<th rowspan="2">条件</th>'),
-          $('<th colspan="5">対応兵科</th>'),
-          $('<th colspan="5">スキルレベル１０の時の性能</th>'),
+          $('<th rowspan="2">対応兵科</th>'),
+          $('<th colspan="4">スキルレベル１０の時の性能</th>'),
+          $('<th colspan="2">期待値</th>'),
           $('<th rowspan="2">備考</th>'),
         ]);
         $('<tr>').appendTo('#skill_table').append([
-          $('<th>槍</th>'),
-          $('<th>弓</th>'),
-          $('<th>馬</th>'),
-          $('<th>砲</th>'),
-          $('<th>器</th>'),
           $('<th>確率</th>'),
-          $('<th>効果</th>'),
+          $('<th>上昇</th>'),
           $('<th>破壊</th>'),
           $('<th>速度</th>'),
-          $('<th>期待値</th>'),
+          $('<th>上昇</th>'),
+          $('<th>破壊</th>'),
         ]);
         
         //データ作成
@@ -183,24 +179,31 @@
         $('#add_rate').val("+"+add_rate);
         
         table_skill.sort(function(a,b){
-          return (calcExpected(add_rate,SKILL_DATA(b)) - calcExpected(add_rate,SKILL_DATA(a)));
+          return (calcExpectedAtk(add_rate,SKILL_DATA(b)) - calcExpectedAtk(add_rate,SKILL_DATA(a)));
         });
         
         $.each(table_skill, function(){
           var data = SKILL_DATA(this);
+          var heika = $('<td>').append([
+            $('<span>').text('槍').addClass(data.yari ? '' : 'gray'),
+            $('<span>').text('弓').addClass(data.yumi ? '' : 'gray'),
+            $('<span>').text('馬').addClass(data.kiba ? '' : 'gray'),
+            $('<span>').text('砲').addClass(data.teppo ? '' : 'gray'),
+            $('<span>').text('器').addClass(data.heiki ? '' : 'gray'),
+          ]);
+          var exp_atk = calcExpectedAtk(add_rate,data);
+          var exp_des = calcExpectedDes(add_rate,data);
+          
           $('<tr>').appendTo('#skill_table').append([
             $('<td>').text(data.name),
             $('<td>').text(data.condition),
-            data.yari ? $('<td>').text('○') : $('<td>').text('-').addClass('gray'),
-            data.yumi ? $('<td>').text('○') : $('<td>').text('-').addClass('gray'),
-            data.kiba ? $('<td>').text('○') : $('<td>').text('-').addClass('gray'),
-            data.teppo ? $('<td>').text('○') : $('<td>').text('-').addClass('gray'),
-            data.heiki ? $('<td>').text('○') : $('<td>').text('-').addClass('gray'),
+            heika,
             data.eff_rate != 0 ? $('<td>').text(data.eff_rate.toFixed(1)+'%') : $('<td>').text('-').addClass('gray'),
             data.eff_atk != 0 ? $('<td>').text(data.eff_atk.toFixed(1)+'%') : $('<td>').text('-').addClass('gray'),
             data.eff_des != 0 ? $('<td>').text(data.eff_des.toFixed(1)+'%') : $('<td>').text('-').addClass('gray'),
             data.eff_spd != 0 ? $('<td>').text(data.eff_spd.toFixed(1)+'%') : $('<td>').text('-').addClass('gray'),
-            $('<td>').text(calcExpected(add_rate,data).toFixed(1)+'%'),
+            exp_atk != 0 ? $('<td>').text(exp_atk.toFixed(1)+'%') : $('<td>').text('-').addClass('gray'),
+            exp_des != 0 ? $('<td>').text(exp_des.toFixed(1)+'%') : $('<td>').text('-').addClass('gray'),
             (data.desc !== "") ? $('<td>').text(data.desc) : $('<td>').text('-').addClass('gray'),
           ]);
         });
