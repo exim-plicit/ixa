@@ -93,8 +93,8 @@
       </tbody>
     </table>
     <p><label>発動率補整<input id="add_rate" type="text" value="0" style="font-size:8px;height:18px;" disabled></label></p>
-    <table>
-      <tbody id="skill_table">
+    <table id="skill_table">
+      <tbody>
       </tbody>
     </table>
     
@@ -112,16 +112,18 @@
           busho:     IsMatch(data[2],"将"), //将
           eff_rate:  data[3], //発動率(0-1f)
           eff_atk:   data[4], //攻撃効果(0-1f)
-          eff_def:   data[4], //防御効果(0-1f)
-          eff_des:   data[5], //破壊効果(0-1f)
-          eff_spd:   data[6], //速度効果(0-1f)
-          desc:      data[7], //備考
+          eff_def:   data[5], //防御効果(0-1f)
+          eff_des:   data[6], //破壊効果(0-1f)
+          eff_spd:   data[7], //速度効果(0-1f)
+          desc:      data[8], //備考
         };
       }
       
       //期待値計算
       function calcExpectedAtk(add_rate,data){ return Math.min(data.eff_rate + add_rate,100) * data.eff_atk / 100; }
+      function calcExpectedDef(add_rate,data){ return Math.min(data.eff_rate + add_rate,100) * data.eff_def / 100; }
       function calcExpectedDes(add_rate,data){ return Math.min(data.eff_rate + add_rate,100) * data.eff_des / 100; }
+      
       //初期設定
       (function(){
         //状態取得
@@ -159,16 +161,18 @@
           $('<th rowspan="2">スキル名</th>'),
           $('<th rowspan="2">条件</th>'),
           $('<th rowspan="2">対応兵科</th>'),
-          $('<th colspan="4">スキルレベル１０の時の性能</th>'),
-          $('<th colspan="2">期待値</th>'),
+          $('<th colspan="5">スキルレベル１０の時の性能</th>'),
+          $('<th colspan="3">期待値</th>'),
           $('<th rowspan="2">備考</th>'),
         ]);
         $('<tr>').appendTo('#skill_table').append([
           $('<th>確率</th>'),
-          $('<th>上昇</th>'),
+          $('<th>攻撃</th>'),
+          $('<th>防御</th>'),
           $('<th>破壊</th>'),
           $('<th>速度</th>'),
-          $('<th>上昇</th>'),
+          $('<th>攻撃</th>'),
+          $('<th>防御</th>'),
           $('<th>破壊</th>'),
         ]);
         
@@ -192,6 +196,7 @@
             $('<span>').text('器').addClass(data.heiki ? '' : 'gray'),
           ]);
           var exp_atk = calcExpectedAtk(add_rate,data);
+          var exp_def = calcExpectedDef(add_rate,data);
           var exp_des = calcExpectedDes(add_rate,data);
           
           $('<tr>').appendTo('#skill_table').append([
@@ -200,9 +205,11 @@
             heika,
             data.eff_rate != 0 ? $('<td>').text(data.eff_rate.toFixed(1)+'%') : $('<td>').text('-').addClass('gray'),
             data.eff_atk != 0 ? $('<td>').text(data.eff_atk.toFixed(1)+'%') : $('<td>').text('-').addClass('gray'),
+            data.eff_def != 0 ? $('<td>').text(data.eff_def.toFixed(1)+'%') : $('<td>').text('-').addClass('gray'),
             data.eff_des != 0 ? $('<td>').text(data.eff_des.toFixed(1)+'%') : $('<td>').text('-').addClass('gray'),
             data.eff_spd != 0 ? $('<td>').text(data.eff_spd.toFixed(1)+'%') : $('<td>').text('-').addClass('gray'),
             exp_atk != 0 ? $('<td>').text(exp_atk.toFixed(1)+'%') : $('<td>').text('-').addClass('gray'),
+            exp_def != 0 ? $('<td>').text(exp_def.toFixed(1)+'%') : $('<td>').text('-').addClass('gray'),
             exp_des != 0 ? $('<td>').text(exp_des.toFixed(1)+'%') : $('<td>').text('-').addClass('gray'),
             (data.desc !== "") ? $('<td>').text(data.desc) : $('<td>').text('-').addClass('gray'),
           ]);
