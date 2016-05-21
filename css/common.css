@@ -64,6 +64,11 @@ table td{
   line-height: 1.5;
   vertical-align: middle;
 }
+input.para{
+  font-size: 8px;
+  width: 60px;
+  height: 18px;
+}
 .innerbox {
   padding: 4px;
 }

@@ -9,10 +9,89 @@
 
   <body>
     <h1>スキル性能表</h1>
-    <p><label>武将１: 兵法<input id="busho_int_1" type="number" value="450" onchange="createTable();" style="font-size:8px;width:60px;height:18px;"></label></p>
-    <p><label>武将２: 兵法<input id="busho_int_2" type="number" value="450" onchange="createTable();" style="font-size:8px;width:60px;height:18px;"></label></p>
-    <p><label>武将３: 兵法<input id="busho_int_3" type="number" value="450" onchange="createTable();" style="font-size:8px;width:60px;height:18px;"></label></p>
-    <p><label>武将４: 兵法<input id="busho_int_4" type="number" value="450" onchange="createTable();" style="font-size:8px;width:60px;height:18px;"></label></p>
+    <table>
+      <tbody>
+        <tr>
+          <th></th>
+          <th>部隊長</th>
+          <th>小隊長</th>
+          <th>小隊長</th>
+          <th>小隊長</th>
+        </tr>
+        <tr>
+          <th>名前</th>
+          <td><input id="busho_name_1" class="para" type="text" value="織田信長"></td>
+          <td><input id="busho_name_2" class="para" type="text" value="明智光秀"></td>
+          <td><input id="busho_name_3" class="para" type="text" value="豊臣秀吉"></td>
+          <td><input id="busho_name_4" class="para" type="text" value="徳川家康"></td>
+        </tr>
+        <!--
+        <tr>
+          <th>コスト</th>
+          <td><input id="busho_cost_1" class="para" type="number" value="450" onchange="createTable();"></td>
+          <td><input id="busho_cost_2" class="para" type="number" value="450" onchange="createTable();"></td>
+          <td><input id="busho_cost_3" class="para" type="number" value="450" onchange="createTable();"></td>
+          <td><input id="busho_cost_4" class="para" type="number" value="450" onchange="createTable();"></td>
+        </tr>
+        <tr>
+          <th>ランク</th>
+          <td><input id="busho_rank_1" class="para" type="number" value="450" onchange="createTable();"></td>
+          <td><input id="busho_rank_2" class="para" type="number" value="450" onchange="createTable();"></td>
+          <td><input id="busho_rank_3" class="para" type="number" value="450" onchange="createTable();"></td>
+          <td><input id="busho_rank_4" class="para" type="number" value="450" onchange="createTable();"></td>
+        </tr>
+        <tr>
+          <th>レベル</th>
+          <td><input id="busho_lv_1" class="para" type="number" value="450" onchange="createTable();"></td>
+          <td><input id="busho_lv_2" class="para" type="number" value="450" onchange="createTable();"></td>
+          <td><input id="busho_lv_3" class="para" type="number" value="450" onchange="createTable();"></td>
+          <td><input id="busho_lv_4" class="para" type="number" value="450" onchange="createTable();"></td>
+        </tr>
+        <tr>
+          <th>攻撃</th>
+          <td><input id="busho_atk_1" class="para" type="number" value="450" onchange="createTable();"></td>
+          <td><input id="busho_atk_2" class="para" type="number" value="450" onchange="createTable();"></td>
+          <td><input id="busho_atk_3" class="para" type="number" value="450" onchange="createTable();"></td>
+          <td><input id="busho_atk_4" class="para" type="number" value="450" onchange="createTable();"></td>
+        </tr>
+        <tr>
+          <th>防御</th>
+          <td><input id="busho_def_1" class="para" type="number" value="450" onchange="createTable();"></td>
+          <td><input id="busho_def_2" class="para" type="number" value="450" onchange="createTable();"></td>
+          <td><input id="busho_def_3" class="para" type="number" value="450" onchange="createTable();"></td>
+          <td><input id="busho_def_4" class="para" type="number" value="450" onchange="createTable();"></td>
+        </tr>
+        -->
+        <tr>
+          <th>兵法</th>
+          <td><input id="busho_int_1" class="para" type="number" value="450" onchange="createTable();"></td>
+          <td><input id="busho_int_2" class="para" type="number" value="450" onchange="createTable();"></td>
+          <td><input id="busho_int_3" class="para" type="number" value="450" onchange="createTable();"></td>
+          <td><input id="busho_int_4" class="para" type="number" value="450" onchange="createTable();"></td>
+        </tr>
+        <tr>
+          <th>技</th>
+          <td><input id="busho_skill1_1" class="para" type="text" value="----" onchange="createTable();"></td>
+          <td><input id="busho_skill1_2" class="para" type="text" value="----" onchange="createTable();"></td>
+          <td><input id="busho_skill1_3" class="para" type="text" value="----" onchange="createTable();"></td>
+          <td><input id="busho_skill1_4" class="para" type="text" value="----" onchange="createTable();"></td>
+        </tr>
+        <tr>
+          <th>技</th>
+          <td><input id="busho_skill2_1" class="para" type="text" value="----" onchange="createTable();"></td>
+          <td><input id="busho_skill2_2" class="para" type="text" value="----" onchange="createTable();"></td>
+          <td><input id="busho_skill2_3" class="para" type="text" value="----" onchange="createTable();"></td>
+          <td><input id="busho_skill2_4" class="para" type="text" value="----" onchange="createTable();"></td>
+        </tr>
+        <tr>
+          <th>技</th>
+          <td><input id="busho_skill3_1" class="para" type="text" value="----" onchange="createTable();"></td>
+          <td><input id="busho_skill3_2" class="para" type="text" value="----" onchange="createTable();"></td>
+          <td><input id="busho_skill3_3" class="para" type="text" value="----" onchange="createTable();"></td>
+          <td><input id="busho_skill3_4" class="para" type="text" value="----" onchange="createTable();"></td>
+        </tr>
+      </tbody>
+    </table>
     <p><label>発動率補整<input id="add_rate" type="text" value="0" style="font-size:8px;height:18px;" disabled></label></p>
     <table>
       <tbody id="skill_table">
@@ -23,29 +102,63 @@
       function IsMatch(txt, t){ return txt=="全" | txt.indexOf(t) != -1; }
       function SKILL_DATA(data){
         return {
-          name:     data[0], //スキル名
-          yari:     IsMatch(data[1],"槍"), //槍
-          yumi:     IsMatch(data[1],"弓"), //弓
-          kiba:     IsMatch(data[1],"馬"), //馬
-          teppo:    IsMatch(data[1],"砲"), //砲
-          heiki:    IsMatch(data[1],"器"), //器
-          busho:    IsMatch(data[1],"将"), //将
-          eff_rate: data[2], //発動率(0-1f)
-          eff_atk:  data[3], //攻撃効果(0-1f)
-          eff_def:  data[3], //防御効果(0-1f)
-          eff_des:  data[4], //破壊効果(0-1f)
-          eff_spd:  data[5], //速度効果(0-1f)
-          desc:     data[6], //備考
+          name:      data[0], //スキル名
+          condition: data[1], //条件
+          yari:      IsMatch(data[2],"槍"), //槍
+          yumi:      IsMatch(data[2],"弓"), //弓
+          kiba:      IsMatch(data[2],"馬"), //馬
+          teppo:     IsMatch(data[2],"砲"), //砲
+          heiki:     IsMatch(data[2],"器"), //器
+          busho:     IsMatch(data[2],"将"), //将
+          eff_rate:  data[3], //発動率(0-1f)
+          eff_atk:   data[4], //攻撃効果(0-1f)
+          eff_def:   data[4], //防御効果(0-1f)
+          eff_des:   data[5], //破壊効果(0-1f)
+          eff_spd:   data[6], //速度効果(0-1f)
+          desc:      data[7], //備考
         };
       }
       
+      //期待値計算
+      function calcExpected(add_rate,data){
+        return Math.min(data.eff_rate + add_rate,100) * data.eff_atk / 100;
+      }
+      //初期設定
+      (function(){
+        //状態取得
+        var busho_int_1 = localStorage.getItem("busho_int_1");
+        var busho_int_2 = localStorage.getItem("busho_int_2");
+        var busho_int_3 = localStorage.getItem("busho_int_3");
+        var busho_int_4 = localStorage.getItem("busho_int_4");
+        
+        //状態復元
+        if(busho_int_1 !== null) $('#busho_int_1').val(busho_int_1);
+        if(busho_int_2 !== null) $('#busho_int_2').val(busho_int_2);
+        if(busho_int_3 !== null) $('#busho_int_3').val(busho_int_3);
+        if(busho_int_4 !== null) $('#busho_int_4').val(busho_int_4);
+        
+      })();
+      
       function createTable(){
+        //状態取得
+        var busho_int_1 = Number($('#busho_int_1').val());
+        var busho_int_2 = Number($('#busho_int_2').val());
+        var busho_int_3 = Number($('#busho_int_3').val());
+        var busho_int_4 = Number($('#busho_int_4').val());
+        
+        //状態保存
+        localStorage.setItem("busho_int_1", busho_int_1);
+        localStorage.setItem("busho_int_2", busho_int_2);
+        localStorage.setItem("busho_int_3", busho_int_3);
+        localStorage.setItem("busho_int_4", busho_int_4);
+        
         //初期化
         $('#skill_table').empty();
         
         //ヘッダ作成
         $('<tr>').appendTo('#skill_table').append([
           $('<th rowspan="2">スキル名</th>'),
+          $('<th rowspan="2">条件</th>'),
           $('<th colspan="5">対応兵科</th>'),
           $('<th colspan="5">スキルレベル１０の時の性能</th>'),
           $('<th rowspan="2">備考</th>'),
@@ -64,20 +177,20 @@
         ]);
         
         //データ作成
-        var busho_ints = [
-          Number($('#busho_int_1').val()),
-          Number($('#busho_int_2').val()),
-          Number($('#busho_int_3').val()),
-          Number($('#busho_int_4').val())
-        ];
-        busho_ints.sort(function(a,b){return b - a;});
+        var busho_ints = [busho_int_1, busho_int_2, busho_int_3, busho_int_4];
+        busho_ints.sort(function(a,b){return b - a;}); //ソートして軍師を決める
         var add_rate = (busho_ints[0] / 100) + ((busho_ints[1]+busho_ints[2]+busho_ints[3]) / 600);
         $('#add_rate').val("+"+add_rate);
+        
+        table_skill.sort(function(a,b){
+          return (calcExpected(add_rate,SKILL_DATA(b)) - calcExpected(add_rate,SKILL_DATA(a)));
+        });
         
         $.each(table_skill, function(){
           var data = SKILL_DATA(this);
           $('<tr>').appendTo('#skill_table').append([
             $('<td>').text(data.name),
+            $('<td>').text(data.condition),
             data.yari ? $('<td>').text('○') : $('<td>').text('-').addClass('gray'),
             data.yumi ? $('<td>').text('○') : $('<td>').text('-').addClass('gray'),
             data.kiba ? $('<td>').text('○') : $('<td>').text('-').addClass('gray'),
@@ -87,7 +200,7 @@
             data.eff_atk != 0 ? $('<td>').text(data.eff_atk.toFixed(1)+'%') : $('<td>').text('-').addClass('gray'),
             data.eff_des != 0 ? $('<td>').text(data.eff_des.toFixed(1)+'%') : $('<td>').text('-').addClass('gray'),
             data.eff_spd != 0 ? $('<td>').text(data.eff_spd.toFixed(1)+'%') : $('<td>').text('-').addClass('gray'),
-            $('<td>').text((Math.min(data.eff_rate + add_rate,100) * data.eff_atk / 100).toFixed(1)+'%'),
+            $('<td>').text(calcExpected(add_rate,data).toFixed(1)+'%'),
             $('<td>').text(data.desc),
           ]);
         });
