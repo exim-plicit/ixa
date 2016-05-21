@@ -1,1 +1,99 @@
-Hello world
+<html>
+  <head>
+    <title>IXADB</title>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" href="/css/common.css">
+    <script type="text/javascript" src="/lib/jquery.min.js"></script>
+    <script type="text/javascript" src="/table_skill.js"></script>
+  </head>
+
+  <body>
+    <div id="header">スキル性能表</div>
+    <p><label>武将１: 兵法<input id="busho_int_1" type="number" value="450" onchange="createTable();" style="font-size:8px;width:60px;height:18px;"></label></p>
+    <p><label>武将２: 兵法<input id="busho_int_2" type="number" value="450" onchange="createTable();" style="font-size:8px;width:60px;height:18px;"></label></p>
+    <p><label>武将３: 兵法<input id="busho_int_3" type="number" value="450" onchange="createTable();" style="font-size:8px;width:60px;height:18px;"></label></p>
+    <p><label>武将４: 兵法<input id="busho_int_4" type="number" value="450" onchange="createTable();" style="font-size:8px;width:60px;height:18px;"></label></p>
+    <p><label>発動率補整<input id="add_rate" type="text" value="0" style="font-size:8px;height:18px;" disabled></label></p>
+    <table>
+      <tbody id="skill_table">
+      </tbody>
+    </table>
+    
+    <script type="text/javascript">
+      function IsMatch(txt, t){ return txt=="全" | txt.indexOf(t) != -1; }
+      function SKILL_DATA(data){
+        return {
+          name:     data[0], //スキル名
+          yari:     IsMatch(data[1],"槍"), //槍
+          yumi:     IsMatch(data[1],"弓"), //弓
+          kiba:     IsMatch(data[1],"馬"), //馬
+          teppo:    IsMatch(data[1],"砲"), //砲
+          heiki:    IsMatch(data[1],"器"), //器
+          busho:    IsMatch(data[1],"将"), //将
+          eff_rate: data[2], //発動率(0-1f)
+          eff_atk:  data[3], //攻撃効果(0-1f)
+          eff_def:  data[3], //防御効果(0-1f)
+          eff_des:  data[4], //破壊効果(0-1f)
+          eff_spd:  data[5], //速度効果(0-1f)
+          desc:     data[6], //備考
+        };
+      }
+      
+      function createTable(){
+        //初期化
+        $('#skill_table').empty();
+        
+        //ヘッダ作成
+        $('<tr>').appendTo('#skill_table').append([
+          $('<th rowspan="2">スキル名</th>'),
+          $('<th colspan="5">対応兵科</th>'),
+          $('<th colspan="5">スキルレベル１０の時の性能</th>'),
+          $('<th rowspan="2">備考</th>'),
+        ]);
+        $('<tr>').appendTo('#skill_table').append([
+          $('<th>槍</th>'),
+          $('<th>弓</th>'),
+          $('<th>馬</th>'),
+          $('<th>砲</th>'),
+          $('<th>器</th>'),
+          $('<th>確率</th>'),
+          $('<th>効果</th>'),
+          $('<th>破壊</th>'),
+          $('<th>速度</th>'),
+          $('<th>期待値</th>'),
+        ]);
+        
+        //データ作成
+        var busho_ints = [
+          Number($('#busho_int_1').val()),
+          Number($('#busho_int_2').val()),
+          Number($('#busho_int_3').val()),
+          Number($('#busho_int_4').val())
+        ];
+        busho_ints.sort(function(a,b){return b - a;});
+        var add_rate = (busho_ints[0] / 100) + ((busho_ints[1]+busho_ints[2]+busho_ints[3]) / 600);
+        $('#add_rate').val("+"+add_rate);
+        
+        $.each(table_skill, function(){
+          var data = SKILL_DATA(this);
+          $('<tr>').appendTo('#skill_table').append([
+            $('<td>').text(data.name),
+            data.yari ? $('<td>').text('○') : $('<td>').text('-').addClass('gray'),
+            data.yumi ? $('<td>').text('○') : $('<td>').text('-').addClass('gray'),
+            data.kiba ? $('<td>').text('○') : $('<td>').text('-').addClass('gray'),
+            data.teppo ? $('<td>').text('○') : $('<td>').text('-').addClass('gray'),
+            data.heiki ? $('<td>').text('○') : $('<td>').text('-').addClass('gray'),
+            data.eff_rate != 0 ? $('<td>').text(data.eff_rate.toFixed(1)+'%') : $('<td>').text('-').addClass('gray'),
+            data.eff_atk != 0 ? $('<td>').text(data.eff_atk.toFixed(1)+'%') : $('<td>').text('-').addClass('gray'),
+            data.eff_des != 0 ? $('<td>').text(data.eff_des.toFixed(1)+'%') : $('<td>').text('-').addClass('gray'),
+            data.eff_spd != 0 ? $('<td>').text(data.eff_spd.toFixed(1)+'%') : $('<td>').text('-').addClass('gray'),
+            $('<td>').text((Math.min(data.eff_rate + add_rate,100) * data.eff_atk / 100).toFixed(1)+'%'),
+            $('<td>').text(data.desc),
+          ]);
+        });
+      }
+      
+      createTable();
+    </script> 
+  </body>
+</html>
