@@ -201,7 +201,7 @@
             data.eff_des != 0 ? $('<td>').text(data.eff_des.toFixed(1)+'%') : $('<td>').text('-').addClass('gray'),
             data.eff_spd != 0 ? $('<td>').text(data.eff_spd.toFixed(1)+'%') : $('<td>').text('-').addClass('gray'),
             $('<td>').text(calcExpected(add_rate,data).toFixed(1)+'%'),
-            $('<td>').text(data.desc),
+            (data.desc !== "") ? $('<td>').text(data.desc) : $('<td>').text('-').addClass('gray'),
           ]);
         });
       }
