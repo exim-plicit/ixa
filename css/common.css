@@ -24,12 +24,10 @@ html,body,div,span,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acron
 body{
   font-size: 12px;
   margin: 0;
-  padding: 64px 0;
   line-height: 1.5;
-  min-height: 800px;
   font-family: "ＭＳ Ｐ明朝","MS PMincho","ヒラギノ明朝 Pro W3","Hiragino Mincho Pro","Droid Sans";
   color: #FFF;
-  background: black url("img/s5_bg_body_repeat.png") repeat;
+  background: black url("../img/s5_bg_body_repeat.png") repeat;
 }
 a{
   color: #FFF;
@@ -68,24 +66,6 @@ table td{
 }
 .innerbox {
   padding: 4px;
-}
-.ticket {
-  width: 293px;
-  margin: 4px;
-  border: 1px solid #76601d;
-  background: url("img/s5_bg_pattern.png") repeat;
-  float: left;
-}
-.basepointMain {
-  margin: 4px;
-  background: url("img/bg_homename_main.png") repeat-y left top;
-}
-.basepointTop {
-  background: url("img/bg_homename_top.png") no-repeat left top;
-}
-.basepointBottom {
-  background: url("img/bg_homename_bottom.png") no-repeat left bottom;
-  padding: 12px 16px;
 }
 .gray {
   color:lightgray;
