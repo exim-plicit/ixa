@@ -47,7 +47,7 @@ table{
   border-right: 1px solid #76601d;
 }
 
-table th{
+th{
   border-left: 1px solid #76601d;
   border-bottom: 1px dotted #76601d;
   padding: 5px 8px;
@@ -57,7 +57,7 @@ table th{
   background-color: #e0dcc1;
   font-weight: bold;
 }
-table td{
+td{
   border-left: 1px solid #76601d;
   border-bottom: 1px dotted #76601d;
   padding: 4px 8px;
@@ -65,6 +65,9 @@ table td{
   color: #300;
   line-height: 1.5;
   vertical-align: middle;
+}
+td.l{
+  text-align: left;
 }
 input.para{
   font-size: 8px;

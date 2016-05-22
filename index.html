@@ -270,7 +270,7 @@
           
           $('<tr>').appendTo('#skill_table').append([
             $('<td>').text(data.name),
-            $('<td>').text(data.condition),
+            (data.condition !== "") ? $('<td>').text(data.condition) : $('<td>').text('-').addClass('gray'),
             heika,
             data.eff_rate != 0 ? $('<td>').text(data.eff_rate.toFixed(1)+'%') : $('<td>').text('-').addClass('gray'),
             data.eff_atk != 0 ? $('<td>').text(data.eff_atk.toFixed(1)+'%') : $('<td>').text('-').addClass('gray'),
@@ -280,7 +280,7 @@
             exp_atk != 0 ? $('<td>').text(exp_atk.toFixed(1)+'%') : $('<td>').text('-').addClass('gray'),
             exp_def != 0 ? $('<td>').text(exp_def.toFixed(1)+'%') : $('<td>').text('-').addClass('gray'),
             exp_des != 0 ? $('<td>').text(exp_des.toFixed(1)+'%') : $('<td>').text('-').addClass('gray'),
-            (data.desc !== "") ? $('<td>').text(data.desc) : $('<td>').text('-').addClass('gray'),
+            (data.desc !== "") ? $('<td>').text(data.desc).addClass('l') : $('<td>').text('-').addClass('l gray'),
           ]);
         });
       }
