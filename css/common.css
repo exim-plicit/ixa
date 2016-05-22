@@ -37,7 +37,6 @@ table{
   white-space: nowrap;
   border-collapse: separate;
   border-spacing: 0;
-  width: 100%;
   margin: 0;
   padding: 0;
   line-height: 1.0;
@@ -47,6 +46,7 @@ table{
   border-bottom: 1px solid #76601d;
   border-right: 1px solid #76601d;
 }
+
 table th{
   border-left: 1px solid #76601d;
   border-bottom: 1px dotted #76601d;

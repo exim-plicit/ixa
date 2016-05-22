@@ -8,7 +8,7 @@
   </head>
 
   <body>
-    <h1>スキル性能表</h1>
+    <h1>想定部隊スペック</h1>
     <table>
       <tbody>
         <tr>
@@ -93,17 +93,65 @@
       </tbody>
     </table>
     <p><label>発動率補整<input id="add_rate" type="text" value="0" style="font-size:8px;height:18px;" disabled></label></p>
+    
+    <h1>スキル一覧</h1>
+    <p><label>対象フィルタ<select id="type_filter" onChange="createTable();">
+      <option>なし</option>
+      <option>槍</option>
+      <option>弓</option>
+      <option>馬</option>
+      <option>砲</option>
+      <option>器</option>
+      <option>将</option>
+      <option>槍弓</option>
+      <option>槍馬</option>
+      <option>槍砲</option>
+      <option>槍器</option>
+      <option>弓馬</option>
+      <option>弓砲</option>
+      <option>弓器</option>
+      <option>馬砲</option>
+      <option>馬器</option>
+      <option>槍弓馬</option>
+      <option>槍弓砲</option>
+      <option>槍弓器</option>
+      <option>槍馬砲</option>
+      <option>槍馬器</option>
+      <option>槍砲器</option>
+      <option>弓馬砲</option>
+      <option>弓馬器</option>
+      <option>弓砲器</option>
+      <option>馬砲器</option>
+      <option>槍弓馬砲</option>
+      <option>槍弓馬器</option>
+      <option>全</option>
+    </select></label></p>
+    <p><label>ソート順<select id="sort_type" onChange="createTable();">
+      <option value="default">デフォルト</option>
+      <option value="exp_atk">期待値順（攻撃）</option>
+      <option value="exp_def">期待値順（防御）</option>
+      <option value="exp_des">期待値順（破壊）</option>
+    </select></label></p>
     <table id="skill_table">
       <tbody>
       </tbody>
     </table>
     
     <script type="text/javascript">
-      function IsMatch(txt, t){ return txt=="全" | txt.indexOf(t) != -1; }
+      //対応兵科,確認兵科
+      function IsMatch(txt, t){
+        if(txt=="全") return true;
+        var arr = t.split("");
+        for(var i = 0 ; i < arr.length ; ++i){
+          if(txt.indexOf(arr[i]) == -1) return false; //対応してない兵科が混じってた
+        }
+        return true;
+      }
       function SKILL_DATA(data){
         return {
           name:      data[0], //スキル名
           condition: data[1], //条件
+          target:    data[2],
           yari:      IsMatch(data[2],"槍"), //槍
           yumi:      IsMatch(data[2],"弓"), //弓
           kiba:      IsMatch(data[2],"馬"), //馬
@@ -182,18 +230,38 @@
         var add_rate = (busho_ints[0] / 100) + ((busho_ints[1]+busho_ints[2]+busho_ints[3]) / 600);
         $('#add_rate').val("+"+add_rate);
         
-        table_skill.sort(function(a,b){
-          return (calcExpectedAtk(add_rate,SKILL_DATA(b)) - calcExpectedAtk(add_rate,SKILL_DATA(a)));
-        });
+        var array = table_skill.concat();
+        switch($('#sort_type').val())
+        {
+          case 'exp_atk':
+            array.sort(function(a,b){
+              return (calcExpectedAtk(add_rate,SKILL_DATA(b)) - calcExpectedAtk(add_rate,SKILL_DATA(a)));
+            });
+            break;
+          case 'exp_def':
+            array.sort(function(a,b){
+              return (calcExpectedDef(add_rate,SKILL_DATA(b)) - calcExpectedDef(add_rate,SKILL_DATA(a)));
+            });
+            break;
+          case 'exp_des':
+            array.sort(function(a,b){
+              return (calcExpectedDes(add_rate,SKILL_DATA(b)) - calcExpectedDes(add_rate,SKILL_DATA(a)));
+            });
+            break;
+        }
         
-        $.each(table_skill, function(){
+        var filter = $('#type_filter').val();
+        $.each(array, function(){
           var data = SKILL_DATA(this);
+          if(filter!='なし' & !IsMatch(data.target,filter)) return;
+          
           var heika = $('<td>').append([
             $('<span>').text('槍').addClass(data.yari ? '' : 'gray'),
             $('<span>').text('弓').addClass(data.yumi ? '' : 'gray'),
             $('<span>').text('馬').addClass(data.kiba ? '' : 'gray'),
             $('<span>').text('砲').addClass(data.teppo ? '' : 'gray'),
             $('<span>').text('器').addClass(data.heiki ? '' : 'gray'),
+            $('<span>').text('将').addClass(data.busho ? '' : 'gray'),
           ]);
           var exp_atk = calcExpectedAtk(add_rate,data);
           var exp_def = calcExpectedDef(add_rate,data);
