@@ -77,3 +77,13 @@ input.para{
 .gray {
   color:lightgray;
 }
+
+h1{
+  border: 2px solid #7b641e;
+  margin-top: 8px;
+  margin-bottom: 15px;
+  font-size: large;
+  background: #000;
+  color: #FFF;
+  padding: 8px;
+}

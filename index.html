@@ -95,43 +95,45 @@
     <p><label>発動率補整<input id="add_rate" type="text" value="0" style="font-size:8px;height:18px;" disabled></label></p>
     
     <h1>スキル一覧</h1>
-    <p><label>対象フィルタ<select id="type_filter" onChange="createTable();">
-      <option>なし</option>
-      <option>槍</option>
-      <option>弓</option>
-      <option>馬</option>
-      <option>砲</option>
-      <option>器</option>
-      <option>将</option>
-      <option>槍弓</option>
-      <option>槍馬</option>
-      <option>槍砲</option>
-      <option>槍器</option>
-      <option>弓馬</option>
-      <option>弓砲</option>
-      <option>弓器</option>
-      <option>馬砲</option>
-      <option>馬器</option>
-      <option>槍弓馬</option>
-      <option>槍弓砲</option>
-      <option>槍弓器</option>
-      <option>槍馬砲</option>
-      <option>槍馬器</option>
-      <option>槍砲器</option>
-      <option>弓馬砲</option>
-      <option>弓馬器</option>
-      <option>弓砲器</option>
-      <option>馬砲器</option>
-      <option>槍弓馬砲</option>
-      <option>槍弓馬器</option>
-      <option>全</option>
-    </select></label></p>
-    <p><label>ソート順<select id="sort_type" onChange="createTable();">
-      <option value="default">デフォルト</option>
-      <option value="exp_atk">期待値順（攻撃）</option>
-      <option value="exp_def">期待値順（防御）</option>
-      <option value="exp_des">期待値順（破壊）</option>
-    </select></label></p>
+    <p>
+      <label>対象フィルタ<select id="type_filter" onChange="createTable();">
+        <option>なし</option>
+        <option>槍</option>
+        <option>弓</option>
+        <option>馬</option>
+        <option>砲</option>
+        <option>器</option>
+        <option>将</option>
+        <option>槍弓</option>
+        <option>槍馬</option>
+        <option>槍砲</option>
+        <option>槍器</option>
+        <option>弓馬</option>
+        <option>弓砲</option>
+        <option>弓器</option>
+        <option>馬砲</option>
+        <option>馬器</option>
+        <option>槍弓馬</option>
+        <option>槍弓砲</option>
+        <option>槍弓器</option>
+        <option>槍馬砲</option>
+        <option>槍馬器</option>
+        <option>槍砲器</option>
+        <option>弓馬砲</option>
+        <option>弓馬器</option>
+        <option>弓砲器</option>
+        <option>馬砲器</option>
+        <option>槍弓馬砲</option>
+        <option>槍弓馬器</option>
+        <option>全</option>
+      </select></label>
+      <label>ソート順<select id="sort_type" onChange="createTable();">
+        <option value="default">デフォルト</option>
+        <option value="exp_atk">期待値順（攻撃）</option>
+        <option value="exp_def">期待値順（防御）</option>
+        <option value="exp_des">期待値順（破壊）</option>
+      </select></label>
+    </p>
     <table id="skill_table">
       <tbody>
       </tbody>
@@ -261,7 +263,6 @@
             $('<span>').text('馬').addClass(data.kiba ? '' : 'gray'),
             $('<span>').text('砲').addClass(data.teppo ? '' : 'gray'),
             $('<span>').text('器').addClass(data.heiki ? '' : 'gray'),
-            $('<span>').text('将').addClass(data.busho ? '' : 'gray'),
           ]);
           var exp_atk = calcExpectedAtk(add_rate,data);
           var exp_def = calcExpectedDef(add_rate,data);
