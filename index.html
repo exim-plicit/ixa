@@ -69,6 +69,7 @@
           <td><input id="busho_int_3" class="para" type="number" value="450" onchange="createTable();"></td>
           <td><input id="busho_int_4" class="para" type="number" value="450" onchange="createTable();"></td>
         </tr>
+        <!--
         <tr>
           <th>技</th>
           <td><input id="busho_skill1_1" class="para" type="text" value="----" onchange="createTable();"></td>
@@ -90,6 +91,7 @@
           <td><input id="busho_skill3_3" class="para" type="text" value="----" onchange="createTable();"></td>
           <td><input id="busho_skill3_4" class="para" type="text" value="----" onchange="createTable();"></td>
         </tr>
+        -->
       </tbody>
     </table>
     <p><label>発動率補整<input id="add_rate" type="text" value="0" style="font-size:8px;height:18px;" disabled></label></p>
@@ -177,12 +179,20 @@
       //初期設定
       (function(){
         //状態取得
+        var busho_name_1 = localStorage.getItem("busho_name_1");
+        var busho_name_2 = localStorage.getItem("busho_name_2");
+        var busho_name_3 = localStorage.getItem("busho_name_3");
+        var busho_name_4 = localStorage.getItem("busho_name_4");
         var busho_int_1 = localStorage.getItem("busho_int_1");
         var busho_int_2 = localStorage.getItem("busho_int_2");
         var busho_int_3 = localStorage.getItem("busho_int_3");
         var busho_int_4 = localStorage.getItem("busho_int_4");
         
         //状態復元
+        if(busho_name_1 !== null) $('#busho_name_1').val(busho_name_1);
+        if(busho_name_2 !== null) $('#busho_name_2').val(busho_name_2);
+        if(busho_name_3 !== null) $('#busho_name_3').val(busho_name_3);
+        if(busho_name_4 !== null) $('#busho_name_4').val(busho_name_4);
         if(busho_int_1 !== null) $('#busho_int_1').val(busho_int_1);
         if(busho_int_2 !== null) $('#busho_int_2').val(busho_int_2);
         if(busho_int_3 !== null) $('#busho_int_3').val(busho_int_3);
@@ -192,12 +202,20 @@
       
       function createTable(){
         //状態取得
+        var busho_name_1 = $('#busho_name_1').val();
+        var busho_name_2 = $('#busho_name_2').val();
+        var busho_name_3 = $('#busho_name_3').val();
+        var busho_name_4 = $('#busho_name_4').val();
         var busho_int_1 = Number($('#busho_int_1').val());
         var busho_int_2 = Number($('#busho_int_2').val());
         var busho_int_3 = Number($('#busho_int_3').val());
         var busho_int_4 = Number($('#busho_int_4').val());
         
         //状態保存
+        localStorage.setItem("busho_name_1", busho_name_1);
+        localStorage.setItem("busho_name_2", busho_name_2);
+        localStorage.setItem("busho_name_3", busho_name_3);
+        localStorage.setItem("busho_name_4", busho_name_4);
         localStorage.setItem("busho_int_1", busho_int_1);
         localStorage.setItem("busho_int_2", busho_int_2);
         localStorage.setItem("busho_int_3", busho_int_3);
