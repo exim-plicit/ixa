@@ -271,35 +271,38 @@
         }
         
         var filter = $('#type_filter').val();
+        var $skill_table = $('#skill_table');
         $.each(array, function(){
           var data = SKILL_DATA(this);
           if(filter!='なし' & !IsMatch(data.target,filter)) return;
           
-          var heika = $('<td>').append([
-            $('<span>').text('槍').addClass(data.yari ? '' : 'gray'),
-            $('<span>').text('弓').addClass(data.yumi ? '' : 'gray'),
-            $('<span>').text('馬').addClass(data.kiba ? '' : 'gray'),
-            $('<span>').text('砲').addClass(data.teppo ? '' : 'gray'),
-            $('<span>').text('器').addClass(data.heiki ? '' : 'gray'),
-          ]);
           var exp_atk = calcExpectedAtk(add_rate,data);
           var exp_def = calcExpectedDef(add_rate,data);
           var exp_des = calcExpectedDes(add_rate,data);
           
-          $('<tr>').appendTo('#skill_table').append([
-            $('<td>').text(data.name),
-            (data.condition !== "") ? $('<td>').text(data.condition) : $('<td>').text('-').addClass('gray'),
-            heika,
-            data.eff_rate != 0 ? $('<td>').text(data.eff_rate.toFixed(1)+'%') : $('<td>').text('-').addClass('gray'),
-            data.eff_atk != 0 ? $('<td>').text(data.eff_atk.toFixed(1)+'%') : $('<td>').text('-').addClass('gray'),
-            data.eff_def != 0 ? $('<td>').text(data.eff_def.toFixed(1)+'%') : $('<td>').text('-').addClass('gray'),
-            data.eff_des != 0 ? $('<td>').text(data.eff_des.toFixed(1)+'%') : $('<td>').text('-').addClass('gray'),
-            data.eff_spd != 0 ? $('<td>').text(data.eff_spd.toFixed(1)+'%') : $('<td>').text('-').addClass('gray'),
-            exp_atk != 0 ? $('<td>').text(exp_atk.toFixed(1)+'%') : $('<td>').text('-').addClass('gray'),
-            exp_def != 0 ? $('<td>').text(exp_def.toFixed(1)+'%') : $('<td>').text('-').addClass('gray'),
-            exp_des != 0 ? $('<td>').text(exp_des.toFixed(1)+'%') : $('<td>').text('-').addClass('gray'),
-            (data.desc !== "") ? $('<td>').text(data.desc).addClass('l') : $('<td>').text('-').addClass('l gray'),
-          ]);
+          $skill_table.append(
+            '<tr>'+
+              '<td>'+data.name+'</td>'+
+              '<td>'+((data.condition !== "") ? data.condition : '<span class="gray">-</span>')+'</td>'+
+              '<td>'+
+                '<span'+(data.yari ? '' : ' class="gray"')+'>槍</span>'+
+                '<span'+(data.yumi ? '' : ' class="gray"')+'>弓</span>'+
+                '<span'+(data.kiba ? '' : ' class="gray"')+'>馬</span>'+
+                '<span'+(data.teppo ? '' : ' class="gray"')+'>砲</span>'+
+                '<span'+(data.heiki ? '' : ' class="gray"')+'>器</span>'+
+              '</td>'+
+              '<td>'+(data.eff_rate != 0 ? data.eff_rate.toFixed(1)+'%' : '<span class="gray">-</span>')+'</td>'+
+              '<td>'+(data.eff_atk != 0 ? data.eff_atk.toFixed(1)+'%' : '<span class="gray">-</span>')+'</td>'+
+              '<td>'+(data.eff_def != 0 ? data.eff_def.toFixed(1)+'%' : '<span class="gray">-</span>')+'</td>'+
+              '<td>'+(data.eff_des != 0 ? data.eff_des.toFixed(1)+'%' : '<span class="gray">-</span>')+'</td>'+
+              '<td>'+(data.eff_spd != 0 ? data.eff_spd.toFixed(1)+'%' : '<span class="gray">-</span>')+'</td>'+
+              '<td>'+(exp_atk != 0 ? exp_atk.toFixed(1)+'%' : '<span class="gray">-</span>')+'</td>'+
+              '<td>'+(exp_def != 0 ? exp_def.toFixed(1)+'%' : '<span class="gray">-</span>')+'</td>'+
+              '<td>'+(exp_des != 0 ? exp_des.toFixed(1)+'%' : '<span class="gray">-</span>')+'</td>'+
+              '<td>'+(data.desc !== "" ? '<span class="l">'+data.desc+'</span>' : '<span class="l gray">-</span>')+'</td>'+
+            '</tr>'
+          );
+          
         });
       }
       
