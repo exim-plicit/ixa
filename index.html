@@ -3,6 +3,7 @@
   <head>
     <title>IXADB</title>
     <meta charset="UTF-8">
+    <meta name=viewport content="width=device-width, initial-scale=1">
     <link rel="stylesheet" type="text/css" href="css/common.css">
   </head>
 
@@ -135,8 +136,10 @@
         <option value="exp_des">期待値順（破壊）</option>
       </select></label>
     </p>
-    <div id="skill_table">
-    </div>
+    <table id="skill_table">
+      <tbody>
+      </tbody>
+    </table>
     
     <script type="text/javascript" src="lib/jquery.min.js"></script>
     <script type="text/javascript" src="table_skill.js"></script>
@@ -223,7 +226,6 @@
         //初期化
         $('#skill_table').empty();
         
-        /*
         //ヘッダ作成
         $('<tr>').appendTo('#skill_table').append([
           $('<th rowspan="2">スキル名</th>'),
@@ -243,7 +245,6 @@
           $('<th>防御</th>'),
           $('<th>破壊</th>'),
         ]);
-        */
         
         //データ作成
         var busho_ints = [busho_int_1, busho_int_2, busho_int_3, busho_int_4];
@@ -280,7 +281,7 @@
           var exp_atk = calcExpectedAtk(add_rate,data);
           var exp_def = calcExpectedDef(add_rate,data);
           var exp_des = calcExpectedDes(add_rate,data);
-          /*
+          
           add_element +=
             '<tr>'+
               '<td>'+data.name+'</td>'+
@@ -302,28 +303,6 @@
               (exp_des != 0 ? '<td>'+exp_des.toFixed(1)+'%' : '<td class="gray">-')+'</td>'+
              (data.desc !== "" ? '<td class="l">'+data.desc : '<td class="l gray">-')+'</td>'+
             '</tr>';
-          */
-          add_element +=
-            '<div class="column">'+
-              '<span>'+data.name+'</span>'+
-              ((data.condition !== "") ? '<span>'+data.condition : '<span class="gray">-')+'</span>'+
-              '<span>'+
-                '<span'+(data.yari ? '' : ' class="gray"')+'>槍</span>'+
-                '<span'+(data.yumi ? '' : ' class="gray"')+'>弓</span>'+
-                '<span'+(data.kiba ? '' : ' class="gray"')+'>馬</span>'+
-                '<span'+(data.teppo ? '' : ' class="gray"')+'>砲</span>'+
-                '<span'+(data.heiki ? '' : ' class="gray"')+'>器</span>'+
-              '</span>'+
-              (exp_atk != 0 ? '<span>'+exp_atk.toFixed(1)+'%' : '<span class="gray">-')+'</span>'+
-              (exp_def != 0 ? '<span>'+exp_def.toFixed(1)+'%' : '<span class="gray">-')+'</span>'+
-              (exp_des != 0 ? '<span>'+exp_des.toFixed(1)+'%' : '<span class="gray">-')+'</span>'+
-              (data.desc !== "" ? '<span class="w256 l">'+data.desc : '<span class="w256 l gray">-')+'</span>'+
-              (data.eff_rate != 0 ? '<span>'+data.eff_rate.toFixed(1)+'%' : '<span class="gray">-')+'</span>'+
-              (data.eff_atk != 0 ? '<span>'+data.eff_atk.toFixed(1)+'%' : '<span class="gray">-</span>')+'</span>'+
-              (data.eff_def != 0 ? '<span>'+data.eff_def.toFixed(1)+'%' : '<span class="gray">-</span>')+'</span>'+
-              (data.eff_des != 0 ? '<span>'+data.eff_des.toFixed(1)+'%' : '<span class="gray">-</span>')+'</span>'+
-              (data.eff_spd != 0 ? '<span>'+data.eff_spd.toFixed(1)+'%' : '<span class="gray">-</span>')+'</span>'+
-            '</div>';
         });
         
         $('#skill_table').append(add_element);
