@@ -1,4 +1,5 @@
 @charset "utf-8";
+/*
 html,body,div,span,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,code,del,dfn,em,img,q,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td{
   margin: 0;
   padding: 0;
@@ -10,29 +11,14 @@ html,body,div,span,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acron
   vertical-align: baseline;
   line-height: 1;
 }
-#header {  
-  position: fixed !important;  
-  position: absolute;  
-  top: 0;  
-  left: 0;  
-  width: 100%;  
-  height: 64px;  
-  background-color: #000;
-  color: #ff0;
-  font-size: 10px;
-}
+*/
 body{
   font-size: 12px;
   margin: 0;
   line-height: 1.5;
   font-family: "ＭＳ Ｐ明朝","MS PMincho","ヒラギノ明朝 Pro W3","Hiragino Mincho Pro","Droid Sans";
   color: #FFF;
-  /*background: black url("../img/s5_bg_body_repeat.png") repeat;*/
-  background: black;
-}
-a{
-  color: #FFF;
-  font-size: 8px;
+  background: black url("../img/s5_bg_body_repeat.png") repeat;
 }
 table{
   white-space: nowrap;
@@ -74,9 +60,6 @@ input.para{
   font-size: 8px;
   width: 60px;
   height: 18px;
-}
-.innerbox {
-  padding: 4px;
 }
 .gray {
   color:lightgray;
