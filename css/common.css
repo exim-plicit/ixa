@@ -27,7 +27,8 @@ body{
   line-height: 1.5;
   font-family: "ＭＳ Ｐ明朝","MS PMincho","ヒラギノ明朝 Pro W3","Hiragino Mincho Pro","Droid Sans";
   color: #FFF;
-  background: black url("../img/s5_bg_body_repeat.png") repeat;
+  /*background: black url("../img/s5_bg_body_repeat.png") repeat;*/
+  background: black;
 }
 a{
   color: #FFF;
