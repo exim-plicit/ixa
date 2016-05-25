@@ -14,7 +14,8 @@ body{
   font-size: 12px;
   margin: 0;
   line-height: 1.5;
-  font-family: "ＭＳ Ｐ明朝","MS PMincho","ヒラギノ明朝 Pro W3","Hiragino Mincho Pro","Droid Sans";
+  /*font-family: "ＭＳ Ｐ明朝","MS PMincho","ヒラギノ明朝 Pro W3","Hiragino Mincho Pro","Droid Sans";*/
+  font: 12px "Hiragino Kaku Gothic Pro","ヒラギノ角ゴ Pro W3",Osaka,メイリオ,Meiryo,"ＭＳ Ｐゴシック","MS PGothic", arial, sans-serif;
   color: #FFF;
   background: black url("../img/s5_bg_body_repeat.png") repeat;
 }
