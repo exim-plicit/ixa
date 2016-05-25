@@ -1,5 +1,5 @@
 @charset "utf-8";
-html,body,div,span,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,q,dl,dt,dd,ol,ul,li,form,table,tbody,tfoot,thead,tr,th,td{
+html,body,div,span,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,code,del,dfn,em,img,q,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td{
   margin: 0;
   padding: 0;
   border: 0;
@@ -10,14 +10,29 @@ html,body,div,span,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,q,dl,dt,dd,ol,ul,li,form
   vertical-align: baseline;
   line-height: 1;
 }
+#header {  
+  position: fixed !important;  
+  position: absolute;  
+  top: 0;  
+  left: 0;  
+  width: 100%;  
+  height: 64px;  
+  background-color: #000;
+  color: #ff0;
+  font-size: 10px;
+}
 body{
   font-size: 12px;
   margin: 0;
   line-height: 1.5;
-  /*font-family: "ＭＳ Ｐ明朝","MS PMincho","ヒラギノ明朝 Pro W3","Hiragino Mincho Pro","Droid Sans";*/
-  font: 12px "Hiragino Kaku Gothic Pro","ヒラギノ角ゴ Pro W3",Osaka,メイリオ,Meiryo,"ＭＳ Ｐゴシック","MS PGothic", arial, sans-serif;
+  font-family: "ＭＳ Ｐ明朝","MS PMincho","ヒラギノ明朝 Pro W3","Hiragino Mincho Pro","Droid Sans";
   color: #FFF;
-  background: black url("../img/s5_bg_body_repeat.png") repeat;
+  /*background: black url("../img/s5_bg_body_repeat.png") repeat;*/
+  background: black;
+}
+a{
+  color: #FFF;
+  font-size: 8px;
 }
 table{
   white-space: nowrap;
@@ -31,10 +46,6 @@ table{
   border-top: 1px solid #76601d;
   border-bottom: 1px solid #76601d;
   border-right: 1px solid #76601d;
-}
-#skill_table{
-  table-layout: fixed;
-  width: 960px;
 }
 
 th{
@@ -63,6 +74,9 @@ input.para{
   font-size: 8px;
   width: 60px;
   height: 18px;
+}
+.innerbox {
+  padding: 4px;
 }
 .gray {
   color:lightgray;
