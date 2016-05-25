@@ -3,8 +3,6 @@
     <title>IXADB</title>
     <meta charset="UTF-8">
     <link rel="stylesheet" type="text/css" href="css/common.css">
-    <script type="text/javascript" src="lib/jquery.min.js"></script>
-    <script type="text/javascript" src="table_skill.js"></script>
   </head>
 
   <body>
@@ -12,7 +10,7 @@
     <table>
       <tbody>
         <tr>
-          <th></th>
+          <th class="gray">-</th>
           <th>部隊長</th>
           <th>小隊長</th>
           <th>小隊長</th>
@@ -20,10 +18,10 @@
         </tr>
         <tr>
           <th>名前</th>
-          <td><input id="busho_name_1" class="para" type="text" value="織田信長"></td>
-          <td><input id="busho_name_2" class="para" type="text" value="明智光秀"></td>
-          <td><input id="busho_name_3" class="para" type="text" value="豊臣秀吉"></td>
-          <td><input id="busho_name_4" class="para" type="text" value="徳川家康"></td>
+          <td><input id="busho_name_1" class="para" type="text" value="----"></td>
+          <td><input id="busho_name_2" class="para" type="text" value="----"></td>
+          <td><input id="busho_name_3" class="para" type="text" value="----"></td>
+          <td><input id="busho_name_4" class="para" type="text" value="----"></td>
         </tr>
         <!--
         <tr>
@@ -141,6 +139,8 @@
       </tbody>
     </table>
     
+    <script type="text/javascript" src="lib/jquery.min.js"></script>
+    <script type="text/javascript" src="table_skill.js"></script>
     <script type="text/javascript">
       //対応兵科,確認兵科
       function IsMatch(txt, t){
@@ -271,7 +271,7 @@
         }
         
         var filter = $('#type_filter').val();
-        var $skill_table = $('#skill_table');
+        var add_element = '';
         $.each(array, function(){
           var data = SKILL_DATA(this);
           if(filter!='なし' & !IsMatch(data.target,filter)) return;
@@ -280,7 +280,7 @@
           var exp_def = calcExpectedDef(add_rate,data);
           var exp_des = calcExpectedDes(add_rate,data);
           
-          $skill_table.append(
+          add_element +=
             '<tr>'+
               '<td>'+data.name+'</td>'+
               '<td>'+((data.condition !== "") ? data.condition : '<span class="gray">-</span>')+'</td>'+
@@ -300,10 +300,10 @@
               '<td>'+(exp_def != 0 ? exp_def.toFixed(1)+'%' : '<span class="gray">-</span>')+'</td>'+
               '<td>'+(exp_des != 0 ? exp_des.toFixed(1)+'%' : '<span class="gray">-</span>')+'</td>'+
               '<td>'+(data.desc !== "" ? '<span class="l">'+data.desc+'</span>' : '<span class="l gray">-</span>')+'</td>'+
-            '</tr>'
-          );
-          
+            '</tr>';
         });
+        
+        $('#skill_table').append(add_element);
       }
       
       createTable();
