@@ -32,6 +32,10 @@ table{
   border-bottom: 1px solid #76601d;
   border-right: 1px solid #76601d;
 }
+#skill_table{
+  table-layout: fixed;
+  width: 960px;
+}
 
 th{
   border-left: 1px solid #76601d;
