@@ -225,7 +225,6 @@
         $('#skill_table').empty();
         
         //ヘッダ作成
-        /*
         $('<tr>').appendTo('#skill_table').append([
           $('<th rowspan="2">スキル名</th>'),
           $('<th rowspan="2">条件</th>'),
@@ -243,13 +242,6 @@
           $('<th>攻撃</th>'),
           $('<th>防御</th>'),
           $('<th>破壊</th>'),
-        ]);
-        */
-        $('<tr>').appendTo('#skill_table').append([
-          $('<th>スキル名</th>'),
-          $('<th>条件</th>'),
-          $('<th>対応兵科</th>'),
-          $('<th>備考</th>'),
         ]);
         
         //データ作成
@@ -299,7 +291,6 @@
                 '<span'+(data.teppo ? '' : ' class="gray"')+'>砲</span>'+
                 '<span'+(data.heiki ? '' : ' class="gray"')+'>器</span>'+
               '</td>'+
-              /*
               (data.eff_rate != 0 ? '<td>'+data.eff_rate.toFixed(1)+'%' : '<td class="gray">-')+'</td>'+
               (data.eff_atk != 0 ? '<td>'+data.eff_atk.toFixed(1)+'%' : '<td class="gray">-</span>')+'</td>'+
               (data.eff_def != 0 ? '<td>'+data.eff_def.toFixed(1)+'%' : '<td class="gray">-</span>')+'</td>'+
@@ -308,7 +299,6 @@
               (exp_atk != 0 ? '<td>'+exp_atk.toFixed(1)+'%' : '<td class="gray">-')+'</td>'+
               (exp_def != 0 ? '<td>'+exp_def.toFixed(1)+'%' : '<td class="gray">-')+'</td>'+
               (exp_des != 0 ? '<td>'+exp_des.toFixed(1)+'%' : '<td class="gray">-')+'</td>'+
-              */
              (data.desc !== "" ? '<td class="l">'+data.desc : '<td class="l gray">-')+'</td>'+
             '</tr>';
         });
