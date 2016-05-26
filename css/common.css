@@ -3,10 +3,13 @@ html,body,div,span,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acron
   margin: 0;
   padding: 0;
   border: 0;
+  font: 12px "Hiragino Kaku Gothic Pro","ヒラギノ角ゴ Pro W3",Osaka,メイリオ,Meiryo,"ＭＳ Ｐゴシック","MS PGothic", arial, sans-serif;
+  /*
   font-weight: inherit;
   font-style: inherit;
   font-size: 100%;
   font-family: inherit;
+  */
   vertical-align: baseline;
   line-height: 1;
 }
