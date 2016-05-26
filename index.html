@@ -247,6 +247,19 @@
         */
         $('<tr>').appendTo('#skill_table').append([
           $('<th>スキル名</th>'),
+          $('<th>条件</th>'),
+          $('<th>対応兵科</th>'),
+          $('<th>確率</th>'),
+          $('<th>攻撃</th>'),
+          $('<th>防御</th>'),
+          $('<th>破壊</th>'),
+          $('<th>速度</th>'),
+          $('<th>攻撃</th>'),
+          $('<th>防御</th>'),
+          $('<th>破壊</th>'),
+          $('<th>備考</th>'),
+        ]);
+        $('<tr>').appendTo('#skill_table').append([
         ]);
         
         //データ作成
@@ -286,27 +299,25 @@
           var exp_des = calcExpectedDes(add_rate,data);
           
           add_element +=
-            '<tr>\n'+
-              '<td>'+data.name+'</td>\n'+
-              /*
-              '<td>'+((data.condition !== "") ? data.condition : '<span class="gray">-</span>')+'</td>\n'+
+            '<tr>'+
+              '<td>'+data.name+'</td>'+
+              '<td>'+((data.condition !== "") ? data.condition : '<span class="gray">-</span>')+'</td>'+
               '<td>'+
                 '<span'+(data.yari ? '' : ' class="gray"')+'>槍</span>'+
                 '<span'+(data.yumi ? '' : ' class="gray"')+'>弓</span>'+
                 '<span'+(data.kiba ? '' : ' class="gray"')+'>馬</span>'+
                 '<span'+(data.teppo ? '' : ' class="gray"')+'>砲</span>'+
                 '<span'+(data.heiki ? '' : ' class="gray"')+'>器</span>'+
-              '</td>\n'+
-              (data.eff_rate != 0 ? '<td>'+data.eff_rate.toFixed(1)+'%' : '<td class="gray">-')+'</td>\n'+
-              (data.eff_atk != 0 ? '<td>'+data.eff_atk.toFixed(1)+'%' : '<td class="gray">-</span>')+'</td>\n'+
-              (data.eff_def != 0 ? '<td>'+data.eff_def.toFixed(1)+'%' : '<td class="gray">-</span>')+'</td>\n'+
-              (data.eff_des != 0 ? '<td>'+data.eff_des.toFixed(1)+'%' : '<td class="gray">-</span>')+'</td>\n'+
-              (data.eff_spd != 0 ? '<td>'+data.eff_spd.toFixed(1)+'%' : '<td class="gray">-</span>')+'</td>\n'+
-              (exp_atk != 0 ? '<td>'+exp_atk.toFixed(1)+'%' : '<td class="gray">-')+'</td>\n'+
-              (exp_def != 0 ? '<td>'+exp_def.toFixed(1)+'%' : '<td class="gray">-')+'</td>\n'+
-              (exp_des != 0 ? '<td>'+exp_des.toFixed(1)+'%' : '<td class="gray">-')+'</td>\n'+
-             (data.desc !== "" ? '<td class="l">'+data.desc : '<td class="l gray">-')+'</td>\n'+
-             */
+              '</td>'+
+              (data.eff_rate != 0 ? '<td>'+data.eff_rate.toFixed(1)+'%' : '<td class="gray">-')+'</td>'+
+              (data.eff_atk != 0 ? '<td>'+data.eff_atk.toFixed(1)+'%' : '<td class="gray">-</span>')+'</td>'+
+              (data.eff_def != 0 ? '<td>'+data.eff_def.toFixed(1)+'%' : '<td class="gray">-</span>')+'</td>'+
+              (data.eff_des != 0 ? '<td>'+data.eff_des.toFixed(1)+'%' : '<td class="gray">-</span>')+'</td>'+
+              (data.eff_spd != 0 ? '<td>'+data.eff_spd.toFixed(1)+'%' : '<td class="gray">-</span>')+'</td>'+
+              (exp_atk != 0 ? '<td>'+exp_atk.toFixed(1)+'%' : '<td class="gray">-')+'</td>'+
+              (exp_def != 0 ? '<td>'+exp_def.toFixed(1)+'%' : '<td class="gray">-')+'</td>'+
+              (exp_des != 0 ? '<td>'+exp_des.toFixed(1)+'%' : '<td class="gray">-')+'</td>'+
+              (data.desc !== "" ? '<td class="l">'+data.desc : '<td class="l gray">-')+'</td>'+
             '</tr>';
         });
         
