@@ -225,6 +225,7 @@
         $('#skill_table').empty();
         
         //ヘッダ作成
+        /*
         $('<tr>').appendTo('#skill_table').append([
           $('<th rowspan="2">スキル名</th>'),
           $('<th rowspan="2">条件</th>'),
@@ -242,6 +243,10 @@
           $('<th>攻撃</th>'),
           $('<th>防御</th>'),
           $('<th>破壊</th>'),
+        ]);
+        */
+        $('<tr>').appendTo('#skill_table').append([
+          $('<th>スキル名</th>'),
         ]);
         
         //データ作成
@@ -283,6 +288,7 @@
           add_element +=
             '<tr>\n'+
               '<td>'+data.name+'</td>\n'+
+              /*
               '<td>'+((data.condition !== "") ? data.condition : '<span class="gray">-</span>')+'</td>\n'+
               '<td>'+
                 '<span'+(data.yari ? '' : ' class="gray"')+'>槍</span>'+
@@ -300,6 +306,7 @@
               (exp_def != 0 ? '<td>'+exp_def.toFixed(1)+'%' : '<td class="gray">-')+'</td>\n'+
               (exp_des != 0 ? '<td>'+exp_des.toFixed(1)+'%' : '<td class="gray">-')+'</td>\n'+
              (data.desc !== "" ? '<td class="l">'+data.desc : '<td class="l gray">-')+'</td>\n'+
+             */
             '</tr>';
         });
         
