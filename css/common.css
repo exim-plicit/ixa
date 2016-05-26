@@ -1,37 +1,32 @@
 @charset "utf-8";
+/*
 html,body,div,span,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,code,del,dfn,em,img,q,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td{
   margin: 0;
   padding: 0;
   border: 0;
   font: 12px "Hiragino Kaku Gothic Pro","ヒラギノ角ゴ Pro W3",Osaka,メイリオ,Meiryo,"ＭＳ Ｐゴシック","MS PGothic", arial, sans-serif;
-  /*
   font-weight: inherit;
   font-style: inherit;
   font-size: 100%;
   font-family: inherit;
-  */
   vertical-align: baseline;
   line-height: 1;
 }
-#header {  
-  position: fixed !important;  
-  position: absolute;  
-  top: 0;  
-  left: 0;  
-  width: 100%;  
-  height: 64px;  
-  background-color: #000;
-  color: #ff0;
-  font-size: 10px;
-}
+*/
 body{
+  /*
   font-size: 12px;
   margin: 0;
   line-height: 1.5;
   font-family: "ＭＳ Ｐ明朝","MS PMincho","ヒラギノ明朝 Pro W3","Hiragino Mincho Pro","Droid Sans";
   color: #FFF;
-  /*background: black url("../img/s5_bg_body_repeat.png") repeat;*/
-  background: black;
+  background: black url("../img/s5_bg_body_repeat.png") repeat;
+  */
+  
+  margin-left: 0;
+  margin-right: 0;
+  font: 12px "Hiragino Kaku Gothic Pro","ヒラギノ角ゴ Pro W3",Osaka,メイリオ,Meiryo,"ＭＳ Ｐゴシック","MS PGothic", arial, sans-serif;
+  background: black url("../img/s5_bg_body_repeat.png");
 }
 a{
   color: #FFF;
@@ -39,6 +34,7 @@ a{
 }
 table{
   white-space: nowrap;
+  /*
   border-collapse: separate;
   border-spacing: 0;
   margin: 0;
@@ -49,9 +45,18 @@ table{
   border-top: 1px solid #76601d;
   border-bottom: 1px solid #76601d;
   border-right: 1px solid #76601d;
+  */
+  border-spacing: 1px;
+  margin-bottom: 5px;
+  background-color: #574928;
 }
 
 th{
+  color: #eee;
+  background-color: #74623f;
+  text-align: center;
+  font-weight: 400;
+  /*
   border-left: 1px solid #76601d;
   border-bottom: 1px dotted #76601d;
   padding: 5px 8px;
@@ -60,8 +65,12 @@ th{
   vertical-align: middle;
   background-color: #e0dcc1;
   font-weight: bold;
+  */
 }
 td{
+  background-color: #DACDAD;
+  text-align: center;
+  /*
   border-left: 1px solid #76601d;
   border-bottom: 1px dotted #76601d;
   padding: 4px 8px;
@@ -69,6 +78,7 @@ td{
   color: #300;
   line-height: 1.5;
   vertical-align: middle;
+  */
 }
 td.l{
   text-align: left;
