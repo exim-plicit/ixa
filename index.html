@@ -3,6 +3,7 @@
   <head>
     <title>IXADB</title>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0" />
     <link rel="stylesheet" type="text/css" href="css/common.css">
   </head>
 
@@ -11,7 +12,7 @@
     <table>
       <tbody>
         <tr>
-          <th class="gray">-</th>
+          <th></th>
           <th>部隊長</th>
           <th>小隊長</th>
           <th>小隊長</th>
@@ -24,21 +25,21 @@
           <td><input id="busho_name_3" class="para" type="text" value="----"></td>
           <td><input id="busho_name_4" class="para" type="text" value="----"></td>
         </tr>
-        <!--
         <tr>
           <th>コスト</th>
-          <td><input id="busho_cost_1" class="para" type="number" value="450" onchange="createTable();"></td>
-          <td><input id="busho_cost_2" class="para" type="number" value="450" onchange="createTable();"></td>
-          <td><input id="busho_cost_3" class="para" type="number" value="450" onchange="createTable();"></td>
-          <td><input id="busho_cost_4" class="para" type="number" value="450" onchange="createTable();"></td>
+          <td><input id="busho_cost_1" class="para" type="number" value="4.0" onchange="createTable();"></td>
+          <td><input id="busho_cost_2" class="para" type="number" value="4.0" onchange="createTable();"></td>
+          <td><input id="busho_cost_3" class="para" type="number" value="3.5" onchange="createTable();"></td>
+          <td><input id="busho_cost_4" class="para" type="number" value="3.5" onchange="createTable();"></td>
         </tr>
         <tr>
           <th>ランク</th>
-          <td><input id="busho_rank_1" class="para" type="number" value="450" onchange="createTable();"></td>
-          <td><input id="busho_rank_2" class="para" type="number" value="450" onchange="createTable();"></td>
-          <td><input id="busho_rank_3" class="para" type="number" value="450" onchange="createTable();"></td>
-          <td><input id="busho_rank_4" class="para" type="number" value="450" onchange="createTable();"></td>
+          <td><input id="busho_rank_1" class="para" type="number" value="6" onchange="createTable();"></td>
+          <td><input id="busho_rank_2" class="para" type="number" value="6" onchange="createTable();"></td>
+          <td><input id="busho_rank_3" class="para" type="number" value="6" onchange="createTable();"></td>
+          <td><input id="busho_rank_4" class="para" type="number" value="6" onchange="createTable();"></td>
         </tr>
+        <!--
         <tr>
           <th>レベル</th>
           <td><input id="busho_lv_1" class="para" type="number" value="450" onchange="createTable();"></td>
@@ -155,30 +156,11 @@
         }
         return true;
       }
-      function SKILL_DATA(data){
-        return {
-          name:      data[0], //スキル名
-          condition: data[1], //条件
-          target:    data[2],
-          yari:      IsMatch(data[2],"槍"), //槍
-          yumi:      IsMatch(data[2],"弓"), //弓
-          kiba:      IsMatch(data[2],"馬"), //馬
-          teppo:     IsMatch(data[2],"砲"), //砲
-          heiki:     IsMatch(data[2],"器"), //器
-          busho:     IsMatch(data[2],"将"), //将
-          eff_rate:  data[3], //発動率(0-1f)
-          eff_atk:   data[4], //攻撃効果(0-1f)
-          eff_def:   data[5], //防御効果(0-1f)
-          eff_des:   data[6], //破壊効果(0-1f)
-          eff_spd:   data[7], //速度効果(0-1f)
-          desc:      data[8], //備考
-        };
-      }
       
       //期待値計算
-      function calcExpectedAtk(add_rate,data){ return Math.min(data.eff_rate + add_rate,100) * data.eff_atk / 100; }
-      function calcExpectedDef(add_rate,data){ return Math.min(data.eff_rate + add_rate,100) * data.eff_def / 100; }
-      function calcExpectedDes(add_rate,data){ return Math.min(data.eff_rate + add_rate,100) * data.eff_des / 100; }
+      function calcExpectedAtk(add_rate,data){ return Math.min(data.eff_per + add_rate,100) * data.eff_atk / 100; }
+      function calcExpectedDef(add_rate,data){ return Math.min(data.eff_per + add_rate,100) * data.eff_def / 100; }
+      function calcExpectedDes(add_rate,data){ return Math.min(data.eff_per + add_rate,100) * data.eff_des / 100; }
       
       //初期設定
       (function(){
@@ -221,18 +203,11 @@
         //ヘッダ作成
         $('<tr>').appendTo('#skill_table').append([
           $('<th rowspan="2">スキル名</th>'),
-          $('<th rowspan="2">条件</th>'),
           $('<th rowspan="2">対応兵科</th>'),
-          $('<th colspan="5">スキルレベル１０の時の性能</th>'),
           $('<th colspan="3">期待値</th>'),
-          $('<th rowspan="2">備考</th>'),
+          $('<th rowspan="2">効果</th>'),
         ]);
         $('<tr>').appendTo('#skill_table').append([
-          $('<th>確率</th>'),
-          $('<th>攻撃</th>'),
-          $('<th>防御</th>'),
-          $('<th>破壊</th>'),
-          $('<th>速度</th>'),
           $('<th>攻撃</th>'),
           $('<th>防御</th>'),
           $('<th>破壊</th>'),
@@ -248,40 +223,54 @@
         var add_rate = (busho_ints[0] / 100) + ((busho_ints[1]+busho_ints[2]+busho_ints[3]) / 600);
         $('#add_rate').text("+"+add_rate.toFixed(2)+'%');
         
-        var array = table_skill.concat();
+        var filter = $('#type_filter').val();
+        var env = {
+          busho:[
+            {cost:Number($('#busho_cost_1').val()), rank:Number($('#busho_rank_1').val())},
+            {cost:Number($('#busho_cost_2').val()), rank:Number($('#busho_rank_2').val())},
+            {cost:Number($('#busho_cost_3').val()), rank:Number($('#busho_rank_3').val())},
+            {cost:Number($('#busho_cost_4').val()), rank:Number($('#busho_rank_4').val())},
+          ]
+        };
+        
+        var array = [];
+        $.each(table_skill, function(key,value){
+          var data = skill_type[value.t](env,0,value);
+          if(filter!='なし' & !IsMatch(data.target,filter)) return;
+          
+          array.push({key:key,value:data});
+        });
+        
         switch($('#sort_type').val())
         {
           case 'exp_atk':
             array.sort(function(a,b){
-              return (calcExpectedAtk(add_rate,SKILL_DATA(b)) - calcExpectedAtk(add_rate,SKILL_DATA(a)));
+              return (calcExpectedAtk(add_rate,b.value) - calcExpectedAtk(add_rate,a.value));
             });
             break;
           case 'exp_def':
             array.sort(function(a,b){
-              return (calcExpectedDef(add_rate,SKILL_DATA(b)) - calcExpectedDef(add_rate,SKILL_DATA(a)));
+              return (calcExpectedDef(add_rate,b.value) - calcExpectedDef(add_rate,a.value));
             });
             break;
           case 'exp_des':
             array.sort(function(a,b){
-              return (calcExpectedDes(add_rate,SKILL_DATA(b)) - calcExpectedDes(add_rate,SKILL_DATA(a)));
+              return (calcExpectedDes(add_rate,b.value) - calcExpectedDes(add_rate,a.value));
             });
             break;
         }
         
-        var filter = $('#type_filter').val();
         var add_element = '';
         $.each(array, function(){
-          var data = SKILL_DATA(this);
-          if(filter!='なし' & !IsMatch(data.target,filter)) return;
-          
+          var name = (this).key;
+          var data = (this).value;
           var exp_atk = calcExpectedAtk(add_rate,data);
           var exp_def = calcExpectedDef(add_rate,data);
           var exp_des = calcExpectedDes(add_rate,data);
           
           add_element +=
             '<tr>'+
-              '<td>'+data.name+'</td>'+
-              '<td>'+data.condition+'</td>'+
+              '<td>'+name+'</td>'+
               '<td>'+
                 '<span'+(data.yari ? '' : ' class="gray"')+'>槍</span>'+
                 '<span'+(data.yumi ? '' : ' class="gray"')+'>弓</span>'+
@@ -289,11 +278,6 @@
                 '<span'+(data.teppo ? '' : ' class="gray"')+'>砲</span>'+
                 '<span'+(data.heiki ? '' : ' class="gray"')+'>器</span>'+
               '</td>'+
-              (data.eff_rate != 0 ? '<td>'+data.eff_rate.toFixed(1)+'%' : '<td>')+'</td>'+
-              (data.eff_atk != 0 ? '<td>'+data.eff_atk.toFixed(1)+'%' : '<td class="gray">-</span>')+'</td>'+
-              (data.eff_def != 0 ? '<td>'+data.eff_def.toFixed(1)+'%' : '<td class="gray">-</span>')+'</td>'+
-              (data.eff_des != 0 ? '<td>'+data.eff_des.toFixed(1)+'%' : '<td class="gray">-</span>')+'</td>'+
-              (data.eff_spd != 0 ? '<td>'+data.eff_spd.toFixed(1)+'%' : '<td class="gray">-</span>')+'</td>'+
               (exp_atk != 0 ? '<td>'+exp_atk.toFixed(1)+'%' : '<td class="gray">-')+'</td>'+
               (exp_def != 0 ? '<td>'+exp_def.toFixed(1)+'%' : '<td class="gray">-')+'</td>'+
               (exp_des != 0 ? '<td>'+exp_des.toFixed(1)+'%' : '<td class="gray">-')+'</td>'+
