@@ -5,6 +5,8 @@ body{
   color: #FFF;
   font: 12px "Hiragino Kaku Gothic Pro","ヒラギノ角ゴ Pro W3",Osaka,メイリオ,Meiryo,"ＭＳ Ｐゴシック","MS PGothic", arial, sans-serif;
   background: black url("../img/s5_bg_body_repeat.png");
+  
+  -webkit-text-size-adjust: 100%;
 }
 a{
   color: #FFF;
