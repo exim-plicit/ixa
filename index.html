@@ -20,10 +20,10 @@
         </tr>
         <tr>
           <th>名前</th>
-          <td><input id="busho_name_1" class="para" type="text" value="----"></td>
-          <td><input id="busho_name_2" class="para" type="text" value="----"></td>
-          <td><input id="busho_name_3" class="para" type="text" value="----"></td>
-          <td><input id="busho_name_4" class="para" type="text" value="----"></td>
+          <td><input id="busho_name_1" class="para" type="text" value="----" onchange="createTable();"></td>
+          <td><input id="busho_name_2" class="para" type="text" value="----" onchange="createTable();"></td>
+          <td><input id="busho_name_3" class="para" type="text" value="----" onchange="createTable();"></td>
+          <td><input id="busho_name_4" class="para" type="text" value="----" onchange="createTable();"></td>
         </tr>
         <tr>
           <th>コスト</th>
@@ -98,6 +98,36 @@
     <canvas id="graph" width="1024px" height="64px">図形を表示するには、canvasタグをサポートしたブラウザが必要です。</canvas>
     -->
     <div>発動率補整: <span id="add_rate" /></div>
+    
+    
+    <table>
+      <tbody>
+        <tr>
+          <th>付与対象</th>
+          <th>時間帯</th>
+          <th>攻撃側武将数</th>
+          <th>防御側武将数</th>
+        </tr>
+        <tr>
+          <td>
+            <select id="busho_select_idx" onchange="createTable();">
+              <option id="busho_select_1" value="0">----</option>
+              <option id="busho_select_2" value="1">----</option>
+              <option id="busho_select_3" value="2">----</option>
+              <option id="busho_select_4" value="3">----</option>
+            </select>
+          </td>
+          <td>
+            <select id="time_zone">
+              <option value="day">通常（02時～20時）</option>
+              <option value="night">夜戦（20時～翌02時）</option>
+            </select>
+          </td>
+          <td><input id="busho_atk_num" class="para" style="width:40px;" type="number" value="1" min="1" max="40" onchange="createTable();">武将</td>
+          <td><input id="busho_def_num" class="para" style="width:40px;" type="number" value="1" min="1" max="180" onchange="createTable();">武将</td>
+        </tr>
+      </tbody>
+    </table>
     
     <h1>スキル一覧</h1>
     <p>
@@ -194,7 +224,17 @@
         $('input').each(function(){
           var id = $(this).attr("id");
           var value = $(this).val();
-          if(value !== null) localStorage.setItem(id,value);
+          if(value !== null){
+            if($(this).attr("type") == "number"){
+              var min = Number($(this).attr("min"));
+              var max = Number($(this).attr("max"));
+              value = Number(value);
+              if(isNaN(min)==false && value < min) value = min;
+              if(isNaN(max)==false && value > max) value = max;
+            }
+            $(this).val(value);
+            localStorage.setItem(id,value);
+          }
         });
         
         //初期化
@@ -213,7 +253,15 @@
           $('<th>破壊</th>'),
         ]);
         
-        //データ作成
+        //武将選択
+        $('#busho_select_1').text($('#busho_name_1').val());
+        $('#busho_select_2').text($('#busho_name_2').val());
+        $('#busho_select_3').text($('#busho_name_3').val());
+        $('#busho_select_4').text($('#busho_name_4').val());
+        var busho_select_idx = Number($('#busho_select_idx').val());
+        
+        
+        //兵法値
         var busho_int_1 = Number($('#busho_int_1').val());
         var busho_int_2 = Number($('#busho_int_2').val());
         var busho_int_3 = Number($('#busho_int_3').val());
@@ -225,6 +273,12 @@
         
         var filter = $('#type_filter').val();
         var env = {
+          busho_atk_num:
+            Number($('#busho_atk_num').val()),
+          busho_def_num:
+            Number($('#busho_def_num').val()),
+          time_zone:
+            Number($('#time_zone').val()),
           busho:[
             {cost:Number($('#busho_cost_1').val()), rank:Number($('#busho_rank_1').val())},
             {cost:Number($('#busho_cost_2').val()), rank:Number($('#busho_rank_2').val())},
@@ -235,7 +289,7 @@
         
         var array = [];
         $.each(table_skill, function(key,value){
-          var data = skill_type[value.t](env,0,value);
+          var data = skill_type[value.t](env,busho_select_idx,value);
           if(filter!='なし' & !IsMatch(data.target,filter)) return;
           
           array.push({key:key,value:data});

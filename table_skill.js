@@ -84,7 +84,7 @@ var skill_type = {
       teppo:    IsMatch(data.k,"砲"), //砲
       heiki:    IsMatch(data.k,"器"), //器
       busho:    IsMatch(data.k,"将"), //将
-      eff_per:  (data.per!==undefined) ? data.per : 0, //発動率(0-1f)
+      eff_per:  per, //発動率(0-1f)
       eff_atk:  atk, //攻撃効果(0-1f)
       eff_def:  def, //防御効果(0-1f)
       eff_des:  des, //破壊効果(0-1f)
@@ -117,6 +117,75 @@ var skill_type = {
       heiki:    IsMatch(data.k,"器"), //器
       busho:    IsMatch(data.k,"将"), //将
       eff_per:  per, //発動率(0-1f)
+      eff_atk:  atk, //攻撃効果(0-1f)
+      eff_def:  def, //防御効果(0-1f)
+      eff_des:  des, //破壊効果(0-1f)
+      eff_spd:  spd, //速度効果(0-1f)
+      desc:     descs.join(this.separator), //備考
+    };
+  },
+  //発動率＝確率×防御武将数
+  'mamushi':function(env,idx,data){
+    var per = data.per_r * env.busho_def_num;
+    var atk = (data.atk!==undefined) ? data.atk : 0;
+    var def = (data.def!==undefined) ? data.def : 0;
+    var des = (data.des!==undefined) ? data.des : 0;
+    var spd = (data.spd!==undefined) ? data.spd : 0;
+    var descs = [];
+    if(per>100)per=100;//確率には上限がある
+    if(per != 0) descs.push("確率: "+per.toFixed(1)+"％（内訳: "+data.per_r.toFixed(1) + "％ ×防御武将"+env.busho_def_num+"人）");
+    if(atk != 0) descs.push("攻: "+atk.toFixed(1)+"％");
+    if(def != 0) descs.push("防: "+def.toFixed(1)+"％");
+    if(des != 0) descs.push("破壊: "+des.toFixed(1)+"％");
+    if(spd != 0) descs.push("速度: "+spd.toFixed(1)+"％");
+    descs.push("発動率＝確率×防御武将数");
+    
+    return {
+      target:   data.k,
+      yari:     IsMatch(data.k,"槍"), //槍
+      yumi:     IsMatch(data.k,"弓"), //弓
+      kiba:     IsMatch(data.k,"馬"), //馬
+      teppo:    IsMatch(data.k,"砲"), //砲
+      heiki:    IsMatch(data.k,"器"), //器
+      busho:    IsMatch(data.k,"将"), //将
+      eff_per:  per, //発動率(0-1f)
+      eff_atk:  atk, //攻撃効果(0-1f)
+      eff_def:  def, //防御効果(0-1f)
+      eff_des:  des, //破壊効果(0-1f)
+      eff_spd:  spd, //速度効果(0-1f)
+      desc:     descs.join(this.separator), //備考
+    };
+  },
+  //合流○○時は効果△倍
+  'goryu_eff':function(env,idx,data){
+    var atk_r = (env.busho_atk_num > 4 && data.atk_r!==undefined) ? data.atk_r : 1;
+    var def_r = (env.busho_atk_num > 4 && data.def_r!==undefined) ? data.def_r : 1;
+    var des_r = (env.busho_atk_num > 4 && data.des_r!==undefined) ? data.des_r : 1;
+    var per = ((data.per_b!==undefined) ? data.per_b : 0);
+    var atk = ((data.atk_b!==undefined) ? data.atk_b : 0) * atk_r;
+    var def = ((data.def_b!==undefined) ? data.def_b : 0) * def_r;
+    var des = ((data.des_b!==undefined) ? data.des_b : 0) * des_r;
+    var spd = ((data.spd_b!==undefined) ? data.spd_b : 0);
+    var descs = [];
+    if(per>100)per=100;//確率は上限がある
+    if(per != 0) descs.push("確率: "+per.toFixed(1)+"％");
+    if(atk != 0) descs.push("攻: "+atk.toFixed(1)+"％");
+    if(def != 0) descs.push("防: "+def.toFixed(1)+"％");
+    if(des != 0) descs.push("破壊: "+des.toFixed(1)+"％");
+    if(spd != 0) descs.push("速度: "+spd.toFixed(1)+"％");
+    if(atk_r != 1) descs.push("合流攻撃時は効果"+atk_r+"倍");
+    if(def_r != 1) descs.push("合流攻撃防御時は効果"+def_r+"倍");
+    if(des_r != 1) descs.push("合流攻撃時は破壊"+des_r+"倍");
+    
+    return {
+      target:   data.k,
+      yari:     IsMatch(data.k,"槍"), //槍
+      yumi:     IsMatch(data.k,"弓"), //弓
+      kiba:     IsMatch(data.k,"馬"), //馬
+      teppo:    IsMatch(data.k,"砲"), //砲
+      heiki:    IsMatch(data.k,"器"), //器
+      busho:    IsMatch(data.k,"将"), //将
+      eff_per:  (data.per!==undefined) ? data.per : 0, //発動率(0-1f)
       eff_atk:  atk, //攻撃効果(0-1f)
       eff_def:  def, //防御効果(0-1f)
       eff_des:  des, //破壊効果(0-1f)
@@ -297,28 +366,23 @@ var table_skill = {
   "嬬黒突貫":     { t:"none", k:"槍馬", per:6, atk:60 },
   "天虎招雷":     { t:"none", k:"槍馬", per:8, atk:80 },
 
-/*
   //--------------------------------
   //  槍砲攻
   //--------------------------------
-  //名前,条件,対象,確率,攻撃,防御,破壊,速度,備考
-  {"橙武者", "", "槍砲", 12.5, 10, 0, 0, 0, ""},
-  {"槍陣 弧月", "", "槍砲", 35, 20, 0, 10, 0, ""},
-  {"月光麒麟", "", "槍砲", 25, 25, 0, 5, 0, ""},
-  {"七槍の武", "", "槍砲", 30, 25, 0, 0, 0, ""},
-  {"夢幻の慈愛", "★0", "槍砲", 18, 30, 0, 0, 0, "武将ランクで効果が変化"},
-  {"夢幻の慈愛", "限界突破", "槍砲", 18, 42, 0, 5, 0, "武将ランクで効果が変化"},
-  {"大願幽夢", "", "槍砲", 25, 28, 0, 0, 0, ""},
-  {"姫鬼戦舞", "", "槍砲", 30, 30, 0, 25, 0, ""},
-  {"范可咬撃", "", "槍砲", 30, 35, 0, 0, 0, ""},
-  {"三段撃 烈火", "コスト1", "槍砲", 15, 9, 0, 0, 0, "武将のコストで効果が変化します"},
-  {"三段撃 烈火", "コスト4", "槍砲", 15, 36, 0, 0, 0, "武将のコストで効果が変化します"},
-  {"武運長久", "コスト1", "槍砲", 15, 9, 0, 5, 0, "武将のコストで効果が変化します"},
-  {"武運長久", "コスト4", "槍砲", 15, 36, 0, 5, 0, "武将のコストで効果が変化します"},
-  {"浪切", "", "槍砲", 30, 37, 0, 0, 0, ""},
-  {"銃槍竜騎兵", "", "槍砲", 30, 40, 0, 0, 0, ""},
-  {"美濃の蝮", "敵武将20", "槍砲", 40, 42, 0, 0, 0, "発動率＝確率×防御武将数"},
-  {"美濃の蝮", "敵武将50", "槍砲", 100, 42, 0, 0, 0, "発動率＝確率×防御武将数"},
+  "橙武者":      { t:"none", k:"槍砲", per:12.5, atk:10 },
+  "槍陣 弧月":   { t:"none", k:"槍砲", per:35, atk:20, des:10 },
+  "月光麒麟":    { t:"none", k:"槍砲", per:25, atk:25, des:5 },
+  "七槍の武":    { t:"none", k:"槍砲", per:30, atk:25 },
+  "夢幻の慈愛":  { t:"rank", k:"槍砲", per:18, atk_b:30, atk_r:2 },
+  "大願幽夢":    { t:"none", k:"槍砲", per:25, atk:28 },
+  "姫鬼戦舞":    { t:"none", k:"槍砲", per:30, atk:30, des:25 },
+  "范可咬撃":    { t:"none", k:"槍砲", per:30, atk:35 },
+  "三段撃 烈火": { t:"cost", k:"槍砲", per:15, atk_r:9 },
+  "武運長久":    { t:"cost", k:"槍砲", per:15, atk_r:9, des_b:5 },
+  "浪切":        { t:"none", k:"槍砲", per:30, atk:37 },
+  "銃槍竜騎兵":  { t:"none", k:"槍砲", per:30, atk:40 },
+  "美濃の蝮": { t:"mamushi", k:"槍砲", per_r:2, atk:42 },
+/*
   {"煉獄天焦", "1部隊", "槍砲", 25, 25, 0, 0, 0, "合流攻撃時は効果2倍"},
   {"煉獄天焦", "合流", "槍砲", 25, 50, 0, 0, 0, "合流攻撃時は効果2倍"},
 */
