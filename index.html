@@ -117,7 +117,7 @@
             </select>
           </td>
           <td>
-            <select id="time_zone">
+            <select id="time_zone" onchange="createTable();">
               <option value="day">通常（02時～20時）</option>
               <option value="night">夜戦（20時～翌02時）</option>
             </select>
@@ -183,6 +183,8 @@
       //対応兵科,確認兵科
       function IsMatch(txt, t){
         if(txt=="全") return true;
+        if(txt.indexOf("上級") != -1) return true;
+        if(txt.indexOf("秘境兵") != -1) return true;
         var arr = t.split("");
         for(var i = 0 ; i < arr.length ; ++i){
           if(txt.indexOf(arr[i]) == -1) return false; //対応してない兵科が混じってた
@@ -269,7 +271,7 @@
         var env = {
           busho_atk_num: Number($('#busho_atk_num').val()),
           busho_def_num: Number($('#busho_def_num').val()),
-          time_zone: Number($('#time_zone').val()),
+          time_zone: $('#time_zone').val(),
           kasei: $('#kasei').val(),
           busho:[
             {cost:Number($('#busho_cost_1').val()), rank:Number($('#busho_rank_1').val())},
