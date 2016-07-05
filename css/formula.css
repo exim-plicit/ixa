@@ -1,0 +1,30 @@
+@charset "utf-8";
+
+span.lv_s{
+  display: inline-block;
+  vertical-align: middle;
+  width: 19px;
+  height: 19px;
+  background: url("../img/icon_s.png") no-repeat;
+}
+span.lv_a{
+  display: inline-block;
+  vertical-align: middle;
+  width: 19px;
+  height: 19px;
+  background: url("../img/icon_a.png") no-repeat;
+}
+span.lv_b{
+  display: inline-block;
+  vertical-align: middle;
+  width: 19px;
+  height: 19px;
+  background: url("../img/icon_b.png") no-repeat;
+}
+span.lv_c{
+  display: inline-block;
+  vertical-align: middle;
+  width: 19px;
+  height: 19px;
+  background: url("../img/icon_c.png") no-repeat;
+}
