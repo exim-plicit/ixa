@@ -301,7 +301,9 @@
         
         var array = [];
         $.each(table_skill, function(key,value){
-          var data = skill_type[value.t](env,busho_select_idx,value);
+          var type = value.t;
+          if(type===undefined) type = 'none';
+          var data = skill_type[type](env,busho_select_idx,value);
           if(filter!='なし' & !IsMatch(data.target,filter)) return;
           
           array.push({key:key,value:data});
